@@ -1,0 +1,43 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<div class="row">
+  <div class="col-sm-3">
+    <h1>Groups</h1>
+    <p class="lead">
+      <%= link_to "All books", root_path %>
+    </p>
+    <% @groups.each do |group| %>
+      <p class="lead">
+        <%= link_to group.name, group %>
+      </p>
+    <% end %>
+  </div>
+  <div class="col-sm-9">
+    <h1>All Books</h1>
+    <table class="table">
+      <% @books.each do |book| %>
+        <tr class="row">
+          <td class="col-sm-2">
+            <%= link_to book do %>
+              <%= image_tag book.image_url, id: "img_catalog" %>
+            <% end %>
+          </td>
+          <td class="col-sm">
+            <p class="lead"><%= link_to book.title, book %></p>
+            <p class="mb-0"><%= book.description %></p>
+            <p class="lead">Price <%= book.price %></p>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <ul class="pagination">
+      <% (Book.all.size.to_f/@limit).ceil.times do |n| %>
+        <li class="page-item"> <%= link_to (n + 1).to_s, root_path(offset: n) %> </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+

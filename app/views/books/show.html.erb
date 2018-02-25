@@ -1,0 +1,46 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<div class="row">
+  <div class="col-sm-5">
+    <h1> <%= @book.title %> </h1>
+    <% unless @book.authors.empty? %>
+      <p class="lead">
+        Authors:
+        <% @book.authors.each do |author| %>
+          <%= link_to author.name, author_path(author) %>
+        <% end %>
+      </p>
+    <% end %>
+
+    <% unless @book.groups.empty? %>
+      <p class="lead">
+        Groups:
+        <% @book.groups.each do |group| %>
+          <%= link_to group.name, group_path(group) %>
+        <% end %>
+      </p>
+    <% end %>
+
+    <p class="lead">
+      <strong>Description:</strong>
+      <%= @book.description %>
+    </p>
+  </div>
+  <div class="col-sm-5">
+    <%= image_tag @book.image_url, id: "img" %>
+    <h2 class="lead">
+      <strong>Price:</strong>
+      <%= @book.price %>
+    </h2>
+  </div>
+  <% if current_user && current_user.admin? %>
+    <div class="col-sm-2" id="img">
+      <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-warning" %> |
+      <%= link_to 'Back', books_path, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>
+
+
+

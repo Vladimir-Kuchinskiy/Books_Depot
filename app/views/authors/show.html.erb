@@ -1,0 +1,28 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-10">
+    <h2><%= @author.name %></h2>
+    <% unless @author.books.empty? %>
+      <h3>
+        List of books:
+      </h3>
+      <div class="row">
+        <% @author.books.each do |book| %>
+          <div class="col-sm-3">
+            <%= image_tag book.image_url, id: "image_show" %>
+            <h4><%= link_to book.title, book %></h4>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <% if current_user && current_user.admin? %>
+    <div class="col-sm-2" id="img">
+      <%= link_to 'Edit', edit_author_path(@author), class: "btn btn-warning" %> |
+      <%= link_to 'Back', authors_path, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>

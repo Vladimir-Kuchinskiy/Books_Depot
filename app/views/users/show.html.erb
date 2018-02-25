@@ -1,0 +1,35 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h2><strong>Login: </strong><%= @user.login %></h2>
+    <p class="lead">
+      Role:
+      <% if @user.admin? %>
+        Admin
+      <% else %>
+        User
+      <% end %>
+    </p>
+    <p class="lead">
+      Ability to manage books and groups:
+      <% if @user.special_ability? %>
+        Yes
+      <% else %>
+        No
+      <% end %>
+    </p>
+    <% unless @user.login == "admin" || @user.login == current_user.login %>
+      <%= simple_form_for @user do |f| %>
+        <%= f.input :role, :placeholder => "Might be admin" %>
+        <% if current_user && current_user.admin? && current_user.special_ability? %>
+          <p class="lead">Ability to manage books and groups: <%= f.check_box :special_ability %></p><br/>
+        <% end %>
+        <%= f.submit "Update", :class => "btn btn-primary" %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Editing Group</h1>
+    <%= render 'form', group: @group %>
+    <%= link_to 'Show', @group %> |
+    <%= link_to 'Back', groups_path %>
+  </div>
+  <% if @books %>
+    <div class="col-sm-3">
+      <h3>Add books</h3>
+      <table class="table">
+
+        <% @books.each do |book| %>
+          <% next if @book_ids.include? book.id %>
+          <tr>
+            <td><%= link_to book.title, book %></td>
+            <td><%= link_to "Add", add_book_group_path(@group, book_id: book.id), class: "btn btn-warning btn-sm" %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+  <% unless @group.books.empty? %>
+    <div class="col-sm-3">
+      <h3>Delete books</h3>
+      <table class="table">
+        <% @group.books.each do |book| %>
+          <tr>
+            <td><%= link_to book.title, book %></td>
+            <td><%= link_to "Delete", @group.groupings.find_by(book_id: book.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+</div>

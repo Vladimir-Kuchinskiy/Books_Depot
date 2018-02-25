@@ -1,0 +1,40 @@
+<div class="row">
+
+  <div class="col-sm-6">
+    <h1>Editing Book</h1>
+    <%= render 'form', book: @book %>
+
+    <%= link_to 'Show', @book %> |
+    <%= link_to 'Back', books_path %>
+  </div>
+
+  <% if @authors %>
+    <div class="col-sm-3">
+      <h2>Add authors</h2>
+      <table class="table">
+
+        <% @authors.each do |author| %>
+          <% next if @author_ids.include? author.id %>
+          <tr>
+            <td><%= link_to author.name, author %></td>
+            <td><%= link_to "Add", add_author_book_path(@book, author_id: author.id), class: "btn btn-warning btn-sm" %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+
+  <% unless @book.authors.empty? %>
+  <div class="col-sm-3">
+    <h2>Delete authors</h2>
+    <table class="table">
+      <% @book.authors.each do |author| %>
+      <tr class="authors">
+        <td><%= link_to author.name, author %></td>
+        <td><%= link_to "Remove", author.relations.find_by(book_id: @book.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <% end %>
+</div>

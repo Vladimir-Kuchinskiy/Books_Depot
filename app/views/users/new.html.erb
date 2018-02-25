@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <h1>Sign up</h1>
+    <%= simple_form_for(:user, url: '/users') do |f| %>
+      <%= f.input :login, :placeholder => "Email" %>
+      <%= f.input :password, :placeholder => "Password" %>
+      <%= f.input :password_confirmation, :placeholder => "Password confirmation" %>
+      <%= f.submit "Log in", :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

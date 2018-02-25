@@ -1,0 +1,29 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+input[type=submit] {
+  @extend .btn, .btn-success;
+}
+
+#table_image {
+  height: 85px;
+}
+#img {
+  margin-top: 20px;
+}
+#image_show {
+  height: 190px;
+}
+#img_catalog {
+  margin-top: 20px;
+  height: 270px;
+}
+.session_bar {
+  margin-top: 8px;
+}
+
