@@ -16,9 +16,8 @@
   <div class="col-sm-9">
     <h1>
       <%= @group.name.capitalize %> group
-      <% if current_user && current_user.admin? && current_user.special_ability? %>
+      <% if current_user && current_user.admin? %>
         <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-warning" %>
-        <%= link_to 'Back', groups_path, class: "btn btn-danger" %>
       <% end %>
     </h1>
     <% unless @group.books.empty? %>
@@ -33,7 +32,10 @@
             <td class="col-sm">
               <p class="lead"><%= link_to book.title, book %></p>
               <p class="mb-0"><%= book.description %></p>
-              <p class="lead">Price <%= book.price %></p>
+              <p class="lead">ID: <%= book.id %> | Count: <%= book.count %></p>
+              <% if current_user.admin? %>
+                <p class="lead">Reading now: <%= book.reading_now %></p>
+              <% end %>
             </td>
           </tr>
         <% end %>

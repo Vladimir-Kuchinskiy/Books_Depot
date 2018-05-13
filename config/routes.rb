@@ -13,11 +13,16 @@ Rails.application.routes.draw do
     get "add_author", on: :member
   end
 
-  get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get 'signup' => 'users#new'
+
   resources :users
+
+  resources :clients
+
+  resources :client_has_books
 
   root to: "books_catalog#index"
 

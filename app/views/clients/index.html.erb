@@ -1,0 +1,43 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Clients</h1>
+    <% if current_user && current_user.admin? %>
+      <h3><%= link_to 'New Client', new_client_path, class: "btn btn-info", id: "img" %></h3>
+    <% end %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Created at</th>
+        <th>Updated at</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @clients.each do |client| %>
+        <tr id="<%= client.id %>">
+          <td> <%= client.id %> </td>
+          <td> <%= link_to client.first_name, client %> </td>
+          <td> <%= client.last_name %> </td>
+          <td> <%= client.email %> </td>
+          <td> <%= client.phone_number %> </td>
+          <td> <%= client.created_at.strftime("%d-%m-%Y") %> </td>
+          <td> <%= client.updated_at.strftime("%d-%m-%Y") %> </td>
+          <td>
+            <%= link_to 'Edit', edit_client_path(client), class: "btn btn-warning" %> |
+            <%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

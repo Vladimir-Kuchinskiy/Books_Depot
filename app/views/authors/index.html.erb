@@ -17,15 +17,15 @@
 
     <tbody>
     <% @authors.each do |author| %>
-      <tr>
+      <tr id="<%= author.id %>">
         <td><%= author.id %></td>
         <td><%= link_to author.name, author %></td>
-        <td> <%= author.created_at %> </td>
-        <td> <%= author.updated_at %> </td>
+        <td> <%= author.created_at.strftime("%d-%m-%Y") %> </td>
+        <td> <%= author.updated_at.strftime("%d-%m-%Y") %> </td>
         <td>
           <%= link_to 'Show', author, class: "btn btn-success" %> |
           <%= link_to 'Edit', edit_author_path(author), class: "btn btn-warning" %> |
-          <%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          <%= link_to 'Delete', author, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", remote: true %>
         </td>
       </tr>
     <% end %>

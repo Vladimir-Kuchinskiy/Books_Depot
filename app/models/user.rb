@@ -9,8 +9,4 @@ class User < ApplicationRecord
     self.role == 'admin'
   end
 
-  def special_ability?
-    self.special_ability == true
-  end
-
 end

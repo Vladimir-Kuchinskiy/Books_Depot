@@ -1,5 +1,6 @@
 class GroupingsController < ApplicationController
   before_action :set_grouping, only: [:destroy]
+  before_action :require_admin, only: :destroy
 
   # DELETE /groupings/1
   # DELETE /groupings/1.json

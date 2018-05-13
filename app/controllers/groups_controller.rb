@@ -1,7 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy, :add_book]
   before_action :require_admin, only: [:index, :new, :edit, :create, :update, :destroy]
-  before_action :require_admin_with_special_ability, only: [:new, :edit, :create, :update, :destroy]
   # GET /groups
   # GET /groups.json
   def index
@@ -56,7 +55,8 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
+      format.html { redirect_to groups_url, notice: 'Group was successfully deleted.' }
+      format.js
     end
   end
 

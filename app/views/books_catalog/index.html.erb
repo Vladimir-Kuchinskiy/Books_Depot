@@ -15,6 +15,11 @@
   </div>
   <div class="col-sm-9">
     <h1>All Books</h1>
+    <ul class="pagination">
+      <% (Book.all.size.to_f/@limit).ceil.times do |n| %>
+        <li class="page-item"> <%= link_to (n + 1).to_s, root_path(offset: n) %> </li>
+      <% end %>
+    </ul>
     <table class="table">
       <% @books.each do |book| %>
         <tr class="row">
@@ -26,7 +31,10 @@
           <td class="col-sm">
             <p class="lead"><%= link_to book.title, book %></p>
             <p class="mb-0"><%= book.description %></p>
-            <p class="lead">Price <%= book.price %></p>
+            <p class="lead">ID: <%= book.id %> | Count: <%= book.count %></p>
+            <% if current_user && current_user.admin? %>
+              <p class="lead">Reading now: <%= book.reading_now %></p>
+            <% end %>
           </td>
         </tr>
       <% end %>

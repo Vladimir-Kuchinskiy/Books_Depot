@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225181411) do
+ActiveRecord::Schema.define(version: 20180513114747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,15 +19,32 @@ ActiveRecord::Schema.define(version: 20180225181411) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
   end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.decimal "price"
     t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "count"
+    t.integer "reading_now"
+  end
+
+  create_table "client_has_books", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_client_has_books_on_book_id"
+    t.index ["client_id"], name: "index_client_has_books_on_client_id"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -60,7 +77,6 @@ ActiveRecord::Schema.define(version: 20180225181411) do
     t.string "login"
     t.string "password_digest"
     t.string "role"
-    t.boolean "special_ability"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

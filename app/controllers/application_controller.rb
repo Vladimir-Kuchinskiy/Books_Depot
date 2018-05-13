@@ -11,8 +11,4 @@ class ApplicationController < ActionController::Base
     redirect_to root_path unless current_user && current_user.admin?
   end
 
-  def require_admin_with_special_ability
-    redirect_to root_path unless current_user && current_user.admin? && current_user.special_ability?
-  end
-
 end

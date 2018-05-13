@@ -7,4 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-admin = User.create(login: 'admin', password: 'admin', password_confirmation: 'admin', role: 'admin', special_ability: true)
+admin = User.create(login: 'admin', password: 'admin', password_confirmation: 'admin', role: 'admin')
