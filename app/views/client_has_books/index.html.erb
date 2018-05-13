@@ -1,0 +1,35 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<h1>Reading Now Books</h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Client First Name</th>
+    <th>Client Last Name</th>
+    <th>Client Email</th>
+    <th>Client Phone Number</th>
+    <th>Book Title</th>
+    <th>Book ID</th>
+    <th>Took At</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @client_has_books.each do |client_book| %>
+    <tr id="<%= client_book.id %>" <% if client_book.overeading? %>
+              class="bg-danger"
+        <% end %>>
+      <td> <%= link_to client_book.client.first_name, client_book.client %> </td>
+      <td> <%= client_book.client.last_name %> </td>
+      <td> <%= client_book.client.email %> </td>
+      <td> <%= client_book.client.phone_number %> </td>
+      <td> <%= link_to client_book.book.title, book_path(client_book.book) %> </td>
+      <td> <%= client_book.book.id %> </td>
+      <td> <%= client_book.created_at.strftime("%d-%m-%Y") %> </td>
+      <td> <%= link_to 'Delete', client_book, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'btn btn-danger' %> </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

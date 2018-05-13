@@ -1,5 +1,6 @@
 class RelationsController < ApplicationController
   before_action :set_relation, only: [:destroy]
+  before_action :require_admin, only: :destroy
 
   # DELETE /relations/1
   # DELETE /relations/1.json
@@ -7,7 +8,7 @@ class RelationsController < ApplicationController
     book = @relation.book
     @relation.destroy
     respond_to do |format|
-      format.html { redirect_to edit_book_path(book), notice: 'Author was successfully destroyed.' }
+      format.html { redirect_to edit_book_path(book), notice: 'Author was successfully deleted.' }
       format.json { head :no_content }
     end
   end

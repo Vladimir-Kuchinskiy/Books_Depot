@@ -1,0 +1,6 @@
+$('p:contains("Group was successfully created.")').remove();
+$('p:contains("Group was successfully deleted.")').remove();
+$('tr#<%= @group.id %>>').fadeOut(500, function(){
+    $(this).remove();
+});
+$('header').after('<p class="alert alert-success">Group was successfully deleted.</p>');

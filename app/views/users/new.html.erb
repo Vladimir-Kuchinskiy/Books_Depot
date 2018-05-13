@@ -2,7 +2,7 @@
   <div class="col-sm-4"></div>
   <div class="col-sm-4">
     <h1>Sign up</h1>
-    <%= simple_form_for(:user, url: '/users') do |f| %>
+    <%= simple_form_for(:user, url: users_path) do |f| %>
       <%= f.input :login, :placeholder => "Email" %>
       <%= f.input :password, :placeholder => "Password" %>
       <%= f.input :password_confirmation, :placeholder => "Password confirmation" %>

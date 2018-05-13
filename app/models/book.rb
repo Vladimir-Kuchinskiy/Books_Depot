@@ -1,10 +1,15 @@
 class Book < ApplicationRecord
 
-  validates :title, :image_url, presence: true
+  after_initialize :set_default_for_reading_now
+
+  validates :title, :image_url, :count, presence: true
   validates :title, uniqueness: true
 
   has_many :groupings
   has_many :groups, through: :groupings
+
+  has_many :client_has_books, dependent: :destroy
+  has_many :clients, through: :client_has_books
 
   has_many :relations
   has_many :authors, through: :relations
@@ -24,6 +29,24 @@ class Book < ApplicationRecord
   def add_author(id)
     @author = Author.find(id)
     self.authors << @author
+  end
+
+  def clients_can_read
+    Client.all - clients
+  end
+
+  def client_added
+    update(count: self.count - 1, reading_now: self.reading_now + 1)
+  end
+
+  def client_destroyed
+    update(count: self.count + 1, reading_now: self.reading_now - 1)
+  end
+
+  private
+
+  def set_default_for_reading_now
+    self.reading_now ||= 0
   end
 
 end

@@ -8,7 +8,7 @@
     <%= link_to 'Back', books_path %>
   </div>
 
-  <% if @authors %>
+  <% if @authors.present? %>
     <div class="col-sm-3">
       <h2>Add authors</h2>
       <table class="table">
@@ -25,16 +25,16 @@
   <% end %>
 
   <% unless @book.authors.empty? %>
-  <div class="col-sm-3">
-    <h2>Delete authors</h2>
-    <table class="table">
-      <% @book.authors.each do |author| %>
-      <tr class="authors">
-        <td><%= link_to author.name, author %></td>
-        <td><%= link_to "Remove", author.relations.find_by(book_id: @book.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
+    <div class="col-sm-3">
+      <h2>Delete authors</h2>
+      <table class="table">
+        <% @book.authors.each do |author| %>
+        <tr class="authors">
+          <td><%= link_to author.name, author %></td>
+          <td><%= link_to "Remove", author.relations.find_by(book_id: @book.id), method: :delete, class: "btn btn-danger btn-sm" %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
   <% end %>
 </div>

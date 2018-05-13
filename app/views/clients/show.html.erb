@@ -1,0 +1,32 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h3>
+      <strong>Client: </strong>
+      <%= @client.first_name %> <%= @client.last_name %>
+      <%= link_to 'Edit Profile', edit_client_path(@client), class: "btn btn-warning" %>
+    </h3><br/>
+    <h4><strong>Email: </strong><%= @client.email %></h4><br/>
+    <h4><strong>Phone Number: </strong><%= @client.phone_number %></h4><br/>
+  </div>
+</div>
+
+<% if @client.books.any? %>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Reading Books:</h2>
+    </div>
+    <div class="col-sm-3">
+      <table class="table">
+        <% @client.books.each do |book| %>
+          <tr>
+            <td><%= link_to book.title, book %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>

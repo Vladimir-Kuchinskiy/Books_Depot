@@ -51,7 +51,10 @@ class AuthorsController < ApplicationController
   # DELETE /authors/1.json
   def destroy
     @author.destroy
-    redirect_to authors_url, notice: 'Author was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to authors_url, notice: 'Author was successfully deleted.' }
+      format.js
+    end
   end
 
   private

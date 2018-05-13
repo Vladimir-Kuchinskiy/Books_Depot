@@ -1,0 +1,9 @@
+<%= simple_form_for @client do |f| %>
+
+  <p><%= f.input :first_name, :placeholder => "First Name" %></p>
+  <p><%= f.input :last_name, :placeholder => "Last Name" %></p>
+  <p><%= f.input :email, :placeholder => "Email" %></p>
+  <p><%= f.input :phone_number, :placeholder => "Phone Number" %></p>
+  <p><%= f.submit %></p>
+
+<% end %>

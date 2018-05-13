@@ -26,19 +26,48 @@
       <strong>Description:</strong>
       <%= @book.description %>
     </p>
+
+    <% if current_user && current_user.admin? && @book.clients.any? %>
+      <br/><h4>Clients Reading now:</h4>
+      <table class="table">
+        <% @book.clients.each do |client| %>
+          <tr>
+            <td><%= link_to "#{client.first_name} #{client.last_name}", client %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+    <br/>
   </div>
-  <div class="col-sm-5">
+  <div class="col-sm-3">
     <%= image_tag @book.image_url, id: "img" %>
     <h2 class="lead">
-      <strong>Price:</strong>
-      <%= @book.price %>
+      <p class="lead">ID: <%= @book.id %> | Count: <%= @book.count %></p>
+      <% if current_user && current_user.admin? %>
+        <p class="lead">Reading now: <%= @book.reading_now %></p>
+      <% end %>
     </h2>
   </div>
   <% if current_user && current_user.admin? %>
-    <div class="col-sm-2" id="img">
+    <div class="col-sm-4" id="img">
       <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-warning" %> |
       <%= link_to 'Back', books_path, class: "btn btn-danger" %>
     </div>
+    <% if @book.clients_can_read.any? && @book.count > 0 %>
+      <div class="row">
+        <div class="col-sm-4">
+          <h3>Give books</h3>
+          <table class="table">
+            <% @book.clients_can_read.each do |client| %>
+              <tr>
+                <td><%= link_to "#{client.first_name} #{client.last_name}", client %></td>
+                <td><%= link_to "Give Book", client_has_books_path(client_id: client.id, book_id: @book.id), method: :post, class: "btn btn-primary btn-sm" %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
 

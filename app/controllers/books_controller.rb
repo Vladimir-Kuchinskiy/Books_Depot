@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :add_author]
   before_action :require_admin, only: [:index, :new, :edit, :create, :update, :destroy]
-  before_action :require_admin_with_special_ability, only: [:new, :edit, :create, :update, :destroy]
   # GET /books
   # GET /books.json
   def index
@@ -11,6 +10,7 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @clients = Client.all
   end
 
   # GET /books/new
@@ -55,7 +55,8 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to books_url, notice: 'Book was successfully deleted.' }
+      format.js
     end
   end
 
@@ -72,7 +73,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :description, :price, :image_url, :author_list)
+      params.require(:book).permit(:title, :count,  :description, :image_url, :author_list)
     end
 
 end

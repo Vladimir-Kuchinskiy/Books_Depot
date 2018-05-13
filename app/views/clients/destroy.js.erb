@@ -1,0 +1,6 @@
+$('p:contains("Client was successfully created.")').remove();
+$('p:contains("Client was successfully deleted.")').remove();
+$('tr#<%= @client.id %>>').fadeOut(500, function(){
+    $(this).remove();
+});
+$('header').after('<p class="alert alert-success">Client was successfully deleted.</p>');

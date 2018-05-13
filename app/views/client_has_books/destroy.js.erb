@@ -1,0 +1,6 @@
+$('p:contains("Record was successfully created.")').remove();
+$('p:contains("Record was successfully deleted.")').remove();
+$('tr#<%= @client_has_book.id %>>').fadeOut(500, function(){
+    $(this).remove();
+});
+$('header').after('<p class="alert alert-success">Record was successfully deleted.</p>');

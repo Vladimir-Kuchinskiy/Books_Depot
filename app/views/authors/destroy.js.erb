@@ -1,0 +1,6 @@
+$('p:contains("Author was successfully created.")').remove();
+$('p:contains("Author was successfully deleted.")').remove();
+$('tr#<%= @author.id %>>').fadeOut(500, function(){
+    $(this).remove();
+});
+$('header').after('<p class="alert alert-success">Author was successfully deleted.</p>');
