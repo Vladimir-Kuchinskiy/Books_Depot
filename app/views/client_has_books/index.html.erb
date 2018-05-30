@@ -6,6 +6,7 @@
 <table class="table">
   <thead>
   <tr>
+    <th>Subscription ID</th>
     <th>Client First Name</th>
     <th>Client Last Name</th>
     <th>Client Email</th>
@@ -21,6 +22,7 @@
     <tr id="<%= client_book.id %>" <% if client_book.overeading? %>
               class="bg-danger"
         <% end %>>
+      <td> <%= client_book.id %> </td>
       <td> <%= link_to client_book.client.first_name, client_book.client %> </td>
       <td> <%= client_book.client.last_name %> </td>
       <td> <%= client_book.client.email %> </td>

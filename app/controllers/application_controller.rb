@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    redirect_to root_path unless current_user && current_user.admin?
+    redirect_to root_path, notice: "You don't have rights to view this page" unless current_user && current_user.admin?
   end
 
 end

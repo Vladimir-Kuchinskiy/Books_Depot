@@ -33,7 +33,7 @@
               <p class="lead"><%= link_to book.title, book %></p>
               <p class="mb-0"><%= book.description %></p>
               <p class="lead">ID: <%= book.id %> | Count: <%= book.count %></p>
-              <% if current_user.admin? %>
+              <% if current_user && current_user.admin? %>
                 <p class="lead">Reading now: <%= book.reading_now %></p>
               <% end %>
             </td>
